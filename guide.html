@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防护指南 — 安全培训</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">🛡️ 安全培训</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="demo.html">模拟演示</a></li>
+                <li><a href="quiz.html">知识测验</a></li>
+                <li><a href="guide.html" class="active">防护指南</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="page-header">
+        <div class="container">
+            <h1>📖 防护指南</h1>
+            <p class="page-desc">牢记以下最佳实践，保护自己免受钓鱼攻击的危害。</p>
+        </div>
+    </section>
+
+    <!-- 黄金法则 -->
+    <section class="section" id="golden-rules">
+        <div class="container">
+            <h2>🥇 五条黄金法则</h2>
+            <div class="rules-grid">
+                <div class="rule-card rule-1">
+                    <div class="rule-number">1</div>
+                    <h3>不要点击可疑链接</h3>
+                    <p>将鼠标悬停在链接上查看真实地址。如果不确定，直接手动在浏览器中输入官方网址。</p>
+                </div>
+                <div class="rule-card rule-2">
+                    <div class="rule-number">2</div>
+                    <h3>不要泄露敏感信息</h3>
+                    <p>正规公司不会通过邮件、短信或电话询问你的密码、验证码或银行卡信息。</p>
+                </div>
+                <div class="rule-card rule-3">
+                    <div class="rule-number">3</div>
+                    <h3>验证发件人身份</h3>
+                    <p>检查发件地址的完整域名，不要只看显示名称。如有疑问，通过官方渠道联系确认。</p>
+                </div>
+                <div class="rule-card rule-4">
+                    <div class="rule-number">4</div>
+                    <h3>保持软件更新</h3>
+                    <p>浏览器、操作系统和杀毒软件的更新通常包含安全补丁，能够防御已知的钓鱼攻击手段。</p>
+                </div>
+                <div class="rule-card rule-5">
+                    <div class="rule-number">5</div>
+                    <h3>启用双重认证 (2FA)</h3>
+                    <p>即使密码被窃取，双重认证也能为你的账户提供额外一层保护。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 详细检查清单 -->
+    <section class="section section-alt" id="checklist">
+        <div class="container">
+            <h2>✅ 收到可疑信息时的检查清单</h2>
+            <div class="checklist">
+                <label class="checklist-item">
+                    <input type="checkbox"> 发件人地址是否和官方域名一致？
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox"> 邮件中是否有拼写或语法错误？
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox"> 是否要求你提供密码、验证码等敏感信息？
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox"> 是否使用了"紧急"、"立即"、"否则将被冻结"等制造紧迫感的措辞？
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox"> 将鼠标悬停在链接上 — 显示的地址和实际链接地址一致吗？
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox"> 是否包含意外的附件（如发票、语音邮件等）？
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox"> 这个页面/邮件是否使用 HTTPS（🔒 绿色锁标志）？
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox"> 对方是否要求你立刻行动，不给你思考时间？
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox"> 你是否主动发起了这次联系？如果不是，提高警惕。
+                </label>
+            </div>
+            <p class="checklist-tip">💡 <strong>只要满足其中任何一条，都不要轻信！</strong> 通过官方渠道（官网客服电话、官方 App 等）独立核实。</p>
+        </div>
+    </section>
+
+    <!-- 实用工具 -->
+    <section class="section" id="tools">
+        <div class="container">
+            <h2>🛠️ 推荐的安全工具</h2>
+            <div class="tools-grid">
+                <div class="tool-item">
+                    <h3>🔐 密码管理器</h3>
+                    <p>如 Bitwarden、1Password 等。密码管理器 <strong>不会在钓鱼网站上自动填充密码</strong>，这是识别钓鱼网站的重要信号。</p>
+                </div>
+                <div class="tool-item">
+                    <h3>🛡️ 浏览器安全扩展</h3>
+                    <p>安装钓鱼保护扩展（如 uBlock Origin、Google Safe Browsing 等），它们会自动拦截已知的恶意网站。</p>
+                </div>
+                <div class="tool-item">
+                    <h3>🔑 双重认证 (2FA)</h3>
+                    <p>使用 Authenticator App（如 Google Authenticator、Microsoft Authenticator）代替短信验证码，安全性更高。</p>
+                </div>
+                <div class="tool-item">
+                    <h3>📧 邮件安全网关</h3>
+                    <p>企业用户应部署邮件安全网关，自动过滤和标记可疑邮件。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 遭遇攻击后 -->
+    <section class="section section-alt" id="incident-response">
+        <div class="container">
+            <h2>🚨 如果不幸中招了怎么办？</h2>
+            <div class="steps-vertical">
+                <div class="step-vertical">
+                    <div class="step-v-number">1</div>
+                    <div>
+                        <h3>立即修改密码</h3>
+                        <p>修改受影响账户的密码，并确保其他使用相同密码的账户也一并修改。</p>
+                    </div>
+                </div>
+                <div class="step-vertical">
+                    <div class="step-v-number">2</div>
+                    <div>
+                        <h3>启用或重置双重认证</h3>
+                        <p>检查账户的安全设置，重新绑定双重认证设备。</p>
+                    </div>
+                </div>
+                <div class="step-vertical">
+                    <div class="step-v-number">3</div>
+                    <div>
+                        <h3>联系官方客服</h3>
+                        <p>联系对应平台的官方客服，说明情况，请求协助冻结或保护账户。</p>
+                    </div>
+                </div>
+                <div class="step-vertical">
+                    <div class="step-v-number">4</div>
+                    <div>
+                        <h3>检查账户活动</h3>
+                        <p>查看近期的登录记录和操作记录，确认是否有异常登录或操作。</p>
+                    </div>
+                </div>
+                <div class="step-vertical">
+                    <div class="step-v-number">5</div>
+                    <div>
+                        <h3>通知相关人员</h3>
+                        <p>如果是工作邮箱或公司账户被攻击，立即通知 IT 或安全团队。</p>
+                    </div>
+                </div>
+                <div class="step-vertical">
+                    <div class="step-v-number">6</div>
+                    <div>
+                        <h3>扫描设备</h3>
+                        <p>使用杀毒软件全面扫描设备，确保没有恶意软件被植入。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🔐 本网站为网络安全意识培训用途 · 不收集任何用户数据</p>
+            <p>仅供教育和培训使用 · 请勿用于非法目的</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

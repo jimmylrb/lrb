@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交互式钓鱼模拟演示 — 安全培训</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">🛡️ 安全培训</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="demo.html" class="active">模拟演示</a></li>
+                <li><a href="quiz.html">知识测验</a></li>
+                <li><a href="guide.html">防护指南</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="page-header">
+        <div class="container">
+            <h1>🎣 交互式钓鱼模拟演示</h1>
+            <p class="page-desc">以下是一个模拟的钓鱼邮件和仿冒登录页面。<strong>这是安全的演示</strong> — 每个可疑特征都已被标注。悬停或点击标注点查看说明。</p>
+            <div class="demo-notice">
+                <span class="notice-icon">⚠️</span>
+                <span><strong>教育用途声明：</strong>本页面是安全意识培训演示，<strong>不收集任何输入数据</strong>。任何输入框的内容仅在前端展示，不会被发送或存储。</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 模拟钓鱼邮件 -->
+    <section class="section" id="demo-email">
+        <div class="container">
+            <h2>📧 案例一：钓鱼邮件</h2>
+            <p class="section-desc">这封邮件看起来像是来自"XX支付"，但你能发现其中的问题吗？</p>
+            
+            <div class="demo-card email-demo">
+                <div class="email-header">
+                    <div class="email-field" data-tip="sender">
+                        <span class="field-label">发件人：</span>
+                        <span class="field-value suspicious">security@xx-zhifu-security.com</span>
+                        <span class="tip-trigger">❓</span>
+                        <div class="tip-box">
+                            <h4>⚠️ 可疑的发件地址</h4>
+                            <p>真正的官方邮件应该来自 <code>@xxpay.com</code> 域名。<code>xx-zhifu-security.com</code> 是一个冒牌域名，看起来相似但不是官方地址。</p>
+                        </div>
+                    </div>
+                    <div class="email-field" data-tip="subject">
+                        <span class="field-label">主题：</span>
+                        <span class="field-value suspicious">【紧急通知】您的账户存在异常，请立即验证！</span>
+                        <span class="tip-trigger">❓</span>
+                        <div class="tip-box">
+                            <h4>⚠️ 制造紧迫感</h4>
+                            <p>攻击者使用"紧急"、"立即"等词汇制造焦虑，让你来不及仔细思考就点击。正规公司很少用这种语气。</p>
+                        </div>
+                    </div>
+                    <div class="email-field" data-tip="time">
+                        <span class="field-label">时间：</span>
+                        <span class="field-value">2025-06-18 03:47 AM</span>
+                        <span class="tip-trigger">❓</span>
+                        <div class="tip-box">
+                            <h4>💡 留意发送时间</h4>
+                            <p>凌晨发送的"紧急"邮件？正规公司通常在工作时间联系你。攻击者常选择深夜发送以减少你向官方核实的可能性。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="email-body">
+                    <p>尊敬的用户：</p>
+                    <p>您好！我们检测到您的账户在异地登录，存在安全风险。</p>
+                    <p>为了保障您的资金安全，请立即点击下方按钮进行身份验证。如未在24小时内验证，您的账户将被<strong>暂时冻结</strong>。</p>
+                    <div class="email-link-container">
+                        <a href="#" class="email-link suspicious" onclick="return false;">
+                            https://www.xxpay.com.verify-now.cn/安全验证
+                        </a>
+                        <span class="tip-trigger">❓</span>
+                        <div class="tip-box">
+                            <h4>⚠️ 链接地址与显示的域名不一致</h4>
+                            <p>显示的"xxpay.com"看起来正常，但实际链接指向的是 <code>xxpay.com.verify-now.cn</code>。这是钓鱼攻击的经典手法：显示合法域名，实际跳转到恶意网站。</p>
+                        </div>
+                    </div>
+                    <div class="email-footer-text">
+                        <p>感谢您的配合！</p>
+                        <p>XX支付安全团队</p>
+                        <hr>
+                        <p class="email-disclaimer">此邮件由系统自动发送，请勿回复。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 模拟钓鱼网站 -->
+    <section class="section section-alt" id="demo-site">
+        <div class="container">
+            <h2>🌐 案例二：仿冒登录页面</h2>
+            <p class="section-desc">下面是一个仿冒的登录页面。它看起来很真实，但每一处都隐藏着破绽。</p>
+
+            <div class="demo-notice danger-notice">
+                ⚠️ 这是模拟的仿冒页面，完全用于教育。表单不会提交任何数据。
+            </div>
+
+            <div class="demo-card site-demo">
+                <!-- 浏览器栏 -->
+                <div class="browser-bar">
+                    <div class="browser-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <div class="browser-url suspicious">
+                        🔓 http://xxpay-verify.secure-login.top/
+                        <span class="tip-trigger">❓</span>
+                        <div class="tip-box">
+                            <h4>⚠️ 非 HTTPS 连接</h4>
+                            <p>🔓 这不是 HTTPS 加密连接。正规登录页面一定使用 HTTPS（🔒 绿锁标志）。此外域名 <code>xxpay-verify.secure-login.top</code> 也不是官方域名。</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 仿冒登录表单 -->
+                <div class="fake-login-form">
+                    <div class="fake-logo">XX支付</div>
+                    <h3>账户安全验证</h3>
+                    <p class="form-desc">请输入您的登录信息进行身份验证</p>
+                    <div class="form-group">
+                        <label>账号 / 手机号</label>
+                        <input type="text" placeholder="请输入您的账号" id="demo-username" class="suspicious-input">
+                        <span class="tip-trigger">❓</span>
+                        <div class="tip-box">
+                            <h4>⚠️ 索要敏感信息</h4>
+                            <p>正规登录页面只需要账号密码。这里以"验证"为名收集信息，实际是为了盗取你的凭据。</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>登录密码</label>
+                        <input type="password" placeholder="请输入密码" id="demo-password" class="suspicious-input">
+                        <span class="tip-trigger">❓</span>
+                        <div class="tip-box">
+                            <h4>⚠️ 密码输入框</h4>
+                            <p>这个页面会<strong>记录你输入的所有内容</strong>。仿冒网站的后端会保存你输入的账号和密码，攻击者随后会用它登录真正的网站。</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>短信验证码</label>
+                        <input type="text" placeholder="请输入验证码" class="suspicious-input">
+                        <span class="tip-trigger">❓</span>
+                        <div class="tip-box">
+                            <h4>⚠️ 额外的安全验证</h4>
+                            <p>攻击者不仅要你的密码，还要你的短信验证码（2FA验证码）。有了这个，他们甚至可以绕过双重认证。</p>
+                        </div>
+                    </div>
+                    <button class="fake-submit" onclick="return false;">立即验证</button>
+                    <div class="form-footer">
+                        <a href="#" onclick="return false;">忘记密码？</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 总结：如何识别 -->
+    <section class="section" id="demo-summary">
+        <div class="container">
+            <h2>✅ 你找出了几处破绽？</h2>
+            <div class="summary-list">
+                <div class="summary-item">
+                    <span class="check-icon">✅</span>
+                    <span><strong>域名伪装：</strong> xxpay.com.verify-now.cn 不是 xxpay.com</span>
+                </div>
+                <div class="summary-item">
+                    <span class="check-icon">✅</span>
+                    <span><strong>非 HTTPS：</strong> 没有小锁标志 🔒 的连接不安全</span>
+                </div>
+                <div class="summary-item">
+                    <span class="check-icon">✅</span>
+                    <span><strong>紧急语气：</strong> "24小时内冻结" 制造恐慌</span>
+                </div>
+                <div class="summary-item">
+                    <span class="check-icon">✅</span>
+                    <span><strong>索要验证码：</strong> 正规网站不会在登录页要求短信验证码</span>
+                </div>
+                <div class="summary-item">
+                    <span class="check-icon">✅</span>
+                    <span><strong>发件地址可疑：</strong> 官方不会用 security@xx-zhifu-security.com</span>
+                </div>
+                <div class="summary-item">
+                    <span class="check-icon">✅</span>
+                    <span><strong>凌晨发送：</strong> 选在你可能没有及时核实的时段</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🔐 本网站为网络安全意识培训用途 · 不收集任何用户数据</p>
+            <p>仅供教育和培训使用 · 请勿用于非法目的</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

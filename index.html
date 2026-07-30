@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网络安全意识培训 — 识别钓鱼攻击</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">🛡️ 安全培训</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">首页</a></li>
+                <li><a href="demo.html">模拟演示</a></li>
+                <li><a href="quiz.html">知识测验</a></li>
+                <li><a href="guide.html">防护指南</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>你能够识别<span class="highlight">钓鱼攻击</span>吗？</h1>
+                <p>每年有数十亿人成为网络钓鱼的目标。这个培训将帮助你学会识别并防范钓鱼攻击。</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">91%</span>
+                        <span class="stat-label">网络攻击始于钓鱼邮件</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">$4.9B</span>
+                        <span class="stat-label">2023年全球因钓鱼损失</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">3.4B</span>
+                        <span class="stat-label">每日发送的钓鱼邮件</span>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <a href="demo.html" class="btn btn-primary">🎣 查看模拟演示</a>
+                    <a href="quiz.html" class="btn btn-secondary">📝 开始测验</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 什么是钓鱼攻击 -->
+    <section class="section" id="what-is-phishing">
+        <div class="container">
+            <h2>什么是钓鱼攻击？</h2>
+            <p class="section-desc">钓鱼攻击（Phishing）是攻击者伪装成可信实体，通过电子邮件、短信、虚假网站等手段诱骗用户泄露敏感信息（如用户名、密码、银行卡信息等）的一种社会工程攻击。</p>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">📧</div>
+                    <h3>邮件钓鱼</h3>
+                    <p>最常见的类型。攻击者发送看似来自银行、公司或平台的官方邮件，诱导点击恶意链接或下载附件。</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💬</div>
+                    <h3>短信钓鱼 (Smishing)</h3>
+                    <p>通过 SMS 短信发送虚假链接，伪装成快递通知、银行提醒等，诱导受害者点击。</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📞</div>
+                    <h3>语音钓鱼 (Vishing)</h3>
+                    <p>攻击者通过电话冒充客服、银行工作人员等，直接骗取敏感信息。</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>鱼叉式钓鱼</h3>
+                    <p>针对特定个人或组织的定向攻击，攻击者会事先收集目标信息，让邮件更具迷惑性。</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏢</div>
+                    <h3>鲸钓攻击</h3>
+                    <p>针对高管或财务人员的定向钓鱼，通常伪装成公司内部紧急邮件，要求转账或提供敏感数据。</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🌐</div>
+                    <h3>克隆网站</h3>
+                    <p>攻击者复制正规网站的页面，使用相似的域名（如 go0gle.com），诱导用户输入凭据。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 如何运作 -->
+    <section class="section section-alt" id="how-it-works">
+        <div class="container">
+            <h2>一次典型的钓鱼攻击流程</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>收集信息</h3>
+                    <p>攻击者研究目标或广泛撒网，确定攻击对象。</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>制作诱饵</h3>
+                    <p>伪造看似可信的邮件、短信或网站页面。</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>发送诱饵</h3>
+                    <p>通过邮件、短信、社交媒体等渠道发送。</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>诱骗点击</h3>
+                    <p>受害者点击链接或下载恶意附件。</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3>窃取信息</h3>
+                    <p>凭据、财务信息被盗，或被植入恶意软件。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 警示信号 -->
+    <section class="section" id="warning-signs">
+        <div class="container">
+            <h2>钓鱼攻击的警示信号</h2>
+            <p class="section-desc">遇到以下情况时，请提高警惕：</p>
+            <div class="signs-grid">
+                <div class="sign">
+                    <span class="sign-badge danger">🔴</span>
+                    <div>
+                        <h3>紧急语气</h3>
+                        <p>"您的账户将在24小时内被关闭！" 攻击者制造紧迫感让你来不及思考。</p>
+                    </div>
+                </div>
+                <div class="sign">
+                    <span class="sign-badge danger">🔴</span>
+                    <div>
+                        <h3>异常的发件地址</h3>
+                        <p>仔细检查邮箱地址：support@g00gle.com 不是 support@google.com。</p>
+                    </div>
+                </div>
+                <div class="sign">
+                    <span class="sign-badge danger">🔴</span>
+                    <div>
+                        <h3>索取个人信息</h3>
+                        <p>正规公司不会通过邮件或短信要求你提供密码、验证码或银行卡信息。</p>
+                    </div>
+                </div>
+                <div class="sign">
+                    <span class="sign-badge danger">🔴</span>
+                    <div>
+                        <h3>拼写和语法错误</h3>
+                        <p>钓鱼邮件中常有翻译生硬、错别字或语法不通顺的地方。</p>
+                    </div>
+                </div>
+                <div class="sign">
+                    <span class="sign-badge danger">🔴</span>
+                    <div>
+                        <h3>可疑链接</h3>
+                        <p>将鼠标悬停在链接上（不要点击！）检查实际地址是否与显示的一致。</p>
+                    </div>
+                </div>
+                <div class="sign">
+                    <span class="sign-badge danger">🔴</span>
+                    <div>
+                        <h3>附件诱惑</h3>
+                        <p>意外的发票、账单、语音邮件等附件，往往是恶意软件载体。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🔐 本网站为网络安全意识培训用途 · 不收集任何用户数据</p>
+            <p>仅供教育和培训使用 · 请勿用于非法目的</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

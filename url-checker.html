@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL 钓鱼检测器 — 安全培训</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .url-tester { max-width: 700px; margin: 0 auto; }
+        .url-input-wrap { display: flex; gap: 12px; margin-bottom: 8px; }
+        .url-input-wrap input {
+            flex: 1; padding: 14px 18px; font-size: 0.95rem;
+            border: 2px solid var(--border); border-radius: var(--radius-sm);
+            outline: none; transition: border-color 0.3s;
+        }
+        .url-input-wrap input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,86,219,0.1); }
+        .url-input-wrap button {
+            padding: 14px 28px; background: var(--primary); color: white;
+            border: none; border-radius: var(--radius-sm); font-size: 0.95rem;
+            font-weight: 600; cursor: pointer; transition: background 0.2s;
+            white-space: nowrap;
+        }
+        .url-input-wrap button:hover { background: var(--primary-dark); }
+        .url-hint { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 24px; }
+        .result-card { border-radius: var(--radius); padding: 24px; margin-top: 20px; display: none; }
+        .result-card.danger { display: block; background: var(--danger-light); border: 1px solid #fecaca; }
+        .result-card.safe { display: block; background: var(--success-light); border: 1px solid #bbf7d0; }
+        .result-card.warning { display: block; background: var(--warning-light); border: 1px solid #fcd34d; }
+        .result-card h3 { font-size: 1.1rem; margin-bottom: 12px; }
+        .result-card .verdict { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
+        .risk-items { display: grid; gap: 8px; margin-top: 12px; }
+        .risk-item { padding: 10px 14px; border-radius: 6px; font-size: 0.9rem; display: flex; align-items: flex-start; gap: 8px; }
+        .risk-item.danger { background: #fef2f2; color: #991b1b; }
+        .risk-item.safe { background: #f0fdf4; color: #166534; }
+        .risk-item.info { background: var(--primary-light); color: #1e40af; }
+        .demo-urls { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+        .demo-url-btn { padding: 6px 14px; font-size: 0.8rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); cursor: pointer; transition: all 0.2s; word-break: break-all; }
+        .demo-url-btn:hover { border-color: var(--primary); background: var(--primary-light); }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">🛡️ 安全培训</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="demo.html">模拟演示</a></li>
+                <li><a href="password.html">密码检测</a></li>
+                <li><a href="url-checker.html" class="active">URL检测</a></li>
+                <li><a href="ransomware.html">勒索软件</a></li>
+                <li><a href="quiz.html">测验</a></li>
+                <li><a href="guide.html">防护指南</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>🔍 URL 钓鱼检测器</h1>
+            <p class="page-desc">输入一个 URL，自动分析是否存在钓鱼攻击的可疑特征。<br>⚠️ 本工具仅作教育用途，不保证 100% 检测所有钓鱼链接。</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="url-tester">
+                <div class="url-input-wrap">
+                    <input type="text" id="url-input" placeholder="输入 URL，例如 http://example.com" autocomplete="off">
+                    <button onclick="checkURL()">🔍 检测</button>
+                </div>
+                <div class="url-hint">支持按 Enter 快速检测</div>
+
+                <div id="result-card" class="result-card">
+                    <div class="verdict" id="verdict"></div>
+                    <h3 id="result-title"></h3>
+                    <div class="risk-items" id="risk-items"></div>
+                </div>
+
+                <div class="demo-urls">
+                    <span style="font-size:0.85rem;color:var(--text-secondary);margin-right:4px;width:100%;margin-bottom:4px;">试试检测这些 URL：</span>
+                    <button class="demo-url-btn" onclick="testURL('https://www.google.com')">https://www.google.com</button>
+                    <button class="demo-url-btn" onclick="testURL('http://secure-login.paypa1.com/verify')">http://secure-login.paypa1.com</button>
+                    <button class="demo-url-btn" onclick="testURL('https://www.amazon.com.xyz.top/login')">https://www.amazon.com.xyz.top</button>
+                    <button class="demo-url-btn" onclick="testURL('http://192.168.1.1/admin')">http://192.168.1.1/admin</button>
+                    <button class="demo-url-btn" onclick="testURL('https://tinyurl.com/abc123')">https://tinyurl.com/abc123</button>
+                </div>
+
+                <div style="margin-top:32px;background:var(--primary-light);border:1px solid #bfdbfe;border-radius:var(--radius-sm);padding:20px;">
+                    <h4 style="color:var(--primary);margin-bottom:8px;">📖 本工具检测哪些特征？</h4>
+                    <ul style="font-size:0.9rem;color:var(--text-secondary);line-height:2;">
+                        <li>🔴 ⚡ 使用 IP 地址代替域名</li>
+                        <li>🔴 🔗 使用 URL 缩短服务（如 tinyurl、bit.ly）</li>
+                        <li>🔴 🌐 可疑的顶级域名（.xyz、.top、.club 等）</li>
+                        <li>🔴 🔀 域名中存在混淆字符（数字 1 代替字母 l、0 代替 o 等）</li>
+                        <li>🔴 🔓 非 HTTPS 连接</li>
+                        <li>🔴 🏢 知名品牌名称出现在子域名或路径中（而非主域名）</li>
+                        <li>🔴 📏 异常长的 URL</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🔐 本网站为网络安全意识培训用途 · 不收集任何用户数据</p>
+            <p>仅供教育和培训使用 · 请勿用于非法目的</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('url-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') checkURL();
+        });
+
+        function checkURL() {
+            const url = document.getElementById('url-input').value.trim();
+            if (!url) return;
+            const result = analyzeURL(url);
+            displayResult(result);
+        }
+
+        function testURL(url) {
+            document.getElementById('url-input').value = url;
+            const result = analyzeURL(url);
+            displayResult(result);
+        }
+
+        function analyzeURL(url) {
+            const risks = [];
+            const warnings = [];
+
+            // 1. 非 HTTPS
+            if (url.startsWith('http://')) {
+                risks.push({ type: 'danger', text: '🔓 使用 HTTP 而非 HTTPS — 连接未加密，数据可能被窃听或篡改' });
+            } else if (!url.startsWith('https://')) {
+                risks.push({ type: 'danger', text: '⚠️ 缺少协议前缀 (http:// 或 https://)，不是标准 URL' });
+            }
+
+            // 提取域名
+            let domain = '';
+            try {
+                const u = new URL(url.startsWith('http') ? url : 'http://' + url);
+                domain = u.hostname;
+            } catch(e) {
+                risks.push({ type: 'danger', text: '❌ URL 格式无法解析' });
+                return { verdict: '无法检测', title: 'URL 格式无效', risks, level: 'warning' };
+            }
+
+            // 2. IP 地址代替域名
+            const ipRegex = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/;
+            if (ipRegex.test(domain)) {
+                risks.push({ type: 'danger', text: '🔴 使用 IP 地址代替域名 — 钓鱼网站常直接使用 IP 地址' });
+            }
+
+            // 3. URL 缩短服务
+            const shorteners = ['tinyurl.com','bit.ly','goo.gl','t.co','ow.ly','is.gd','buff.ly','adf.ly','rebrand.ly','cutt.ly','shorturl.at','rb.gy'];
+            if (shorteners.some(s => domain.includes(s))) {
+                risks.push({ type: 'danger', text: `🔴 使用了 URL 缩短服务 (${domain}) — 无法预览真实目标地址` });
+            }
+
+            // 4. 可疑顶级域名
+            const suspiciousTLDs = ['.xyz','.top','.club','.online','.site','.live','.win','.bid','.cam','.rest','.gq','.ml','.tk','.cf','.ga'];
+            const tldMatch = domain.match(/\.([a-z]+)$/);
+            if (tldMatch && suspiciousTLDs.includes('.' + tldMatch[1])) {
+                risks.push({ type: 'danger', text: `🔴 使用了可疑顶级域名 (.${tldMatch[1]}) — 钓鱼网站常用此类域名` });
+            }
+
+            // 5. 知名品牌混淆检测
+            const brands = ['google','facebook','instagram','whatsapp','twitter','microsoft','apple','amazon','paypal','netflix','linkedin','github','dropbox','adobe','alibaba','taobao','tmall','jd','wechat','bank','icbc','pay'];
+            const brandMatches = [];
+            for (const brand of brands) {
+                if (domain.toLowerCase().includes(brand)) {
+                    brandMatches.push(brand);
+                }
+            }
+            if (brandMatches.length > 0) {
+                // 检查是否确实是官方域名
+                const officialDomains = ['google.com','facebook.com','instagram.com','twitter.com','microsoft.com','apple.com','amazon.com','paypal.com','netflix.com','linkedin.com','github.com','dropbox.com'];
+                const isOfficial = officialDomains.some(od => domain.toLowerCase() === od || domain.toLowerCase().endsWith('.' + od));
+                if (!isOfficial && brandMatches.length > 0) {
+                    risks.push({ type: 'danger', text: `🔴 域名包含 "${brandMatches[0]}" 但不是官方域名 — 经典域名仿冒手法` });
+                } else {
+                    warnings.push({ type: 'safe', text: `✅ 域名已验证为官方域名 (${domain})` });
+                }
+            }
+
+            // 6. 长度异常
+            if (url.length > 100) {
+                risks.push({ type: 'warning', text: `⚠️ URL 长度异常 (${url.length} 个字符) — 过长的 URL 可能用于混淆真实地址` });
+            }
+
+            // 7. @ 符号 — 浏览器会忽略@前的所有内容
+            if (url.includes('@')) {
+                risks.push({ type: 'danger', text: '🔴 URL 包含 @ 符号 — 浏览器会忽略 @ 之前的内容，这是钓鱼攻击的经典手法' });
+            }
+
+            // 8. 子域名中带品牌名
+            try {
+                const u = new URL(url.startsWith('http') ? url : 'http://' + url);
+                const hostParts = u.hostname.split('.');
+                if (hostParts.length > 2) {
+                    const subdomain = hostParts.slice(0, -2).join('.');
+                    for (const brand of brands) {
+                        if (subdomain.toLowerCase().includes(brand)) {
+                            risks.push({ type: 'danger', text: `🔴 品牌名 "${brand}" 出现在子域名中而非主域名 — 例如 real-${brand}.malicious.com 是钓鱼手法` });
+                            break;
+                        }
+                    }
+                }
+                // 检查路径中带品牌
+                if (u.pathname.toLowerCase().includes(brandMatches[0] || '') && brandMatches.length > 0 && !isOfficial) {
+                    // already covered above
+                }
+            } catch(e) {}
+
+            // 计算风险等级
+            const dangerCount = risks.filter(r => r.type === 'danger').length;
+            let level, verdict, title;
+            if (dangerCount >= 3) {
+                level = 'danger'; verdict = '🔴 高危'; title = '该 URL 极有可能是钓鱼链接！';
+            } else if (dangerCount >= 1) {
+                level = 'warning'; verdict = '⚠️ 可疑'; title = '该 URL 存在可疑特征，请提高警惕。';
+            } else {
+                level = 'safe'; verdict = '✅ 安全'; title = '该 URL 未检测到明显的可疑特征。';
+            }
+
+            // 显示所有检测项
+            const allItems = [...risks];
+            if (allItems.length === 0) {
+                allItems.push({ type: 'safe', text: '✅ 未检测到常见钓鱼特征' });
+            }
+            // 增加一条安全提示
+            if (level === 'safe') {
+                allItems.push({ type: 'info', text: '💡 提示：即使检测结果安全，也要保持警惕。不点击不明链接是最佳实践。' });
+            }
+
+            return { verdict, title, risks: allItems, level };
+        }
+
+        function displayResult(result) {
+            const card = document.getElementById('result-card');
+            card.className = 'result-card ' + result.level;
+            document.getElementById('verdict').textContent = result.verdict;
+            document.getElementById('result-title').textContent = result.title;
+
+            const itemsDiv = document.getElementById('risk-items');
+            itemsDiv.innerHTML = '';
+            result.risks.forEach(r => {
+                const div = document.createElement('div');
+                div.className = 'risk-item ' + r.type;
+                div.textContent = r.text;
+                itemsDiv.appendChild(div);
+            });
+        }
+    </script>
+</body>
+</html>

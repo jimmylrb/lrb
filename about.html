@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于 — 安全培训</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .about-container { max-width: 700px; margin: 0 auto; }
+        .about-section { margin-bottom: 40px; }
+        .about-section h2 { text-align: left; font-size: 1.3rem; margin-bottom: 12px; }
+        .about-section p, .about-section li { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8; }
+        .creator-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); text-align: center; max-width: 400px; margin: 0 auto 32px; }
+        .creator-avatar { font-size: 5rem; margin-bottom: 16px; }
+        .creator-card h2 { font-size: 1.4rem; margin-bottom: 4px; }
+        .creator-card .subtitle { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px; }
+        .creator-card .desc { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+        .tech-stack { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 16px; }
+        .tech-stack span { padding: 4px 14px; background: var(--primary-light); color: var(--primary); border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+        .footer-links { display: flex; justify-content: center; gap: 16px; margin-top: 20px; }
+        .footer-links a { color: var(--primary); text-decoration: none; font-size: 0.9rem; }
+        .footer-links a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">🛡️ 安全培训</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="demo.html">模拟演示</a></li>
+                <li><a href="password.html">密码检测</a></li>
+                <li><a href="url-checker.html">URL检测</a></li>
+                <li><a href="ransomware.html">勒索软件</a></li>
+                <li><a href="quiz.html">测验</a></li>
+                <li><a href="guide.html">防护指南</a></li>
+                <li><a href="about.html" class="active">关于</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>📋 关于本站</h1>
+            <p class="page-desc">这个安全培训网站的由来和背后的理念。</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="about-container">
+                <!-- 制作人 -->
+                <div class="creator-card">
+                    <div class="creator-avatar">👨‍💻</div>
+                    <h2>jimmylrb</h2>
+                    <div class="subtitle">网络安全学习者 · 本网站制作人</div>
+                    <p class="desc">
+                        一个对网络安全感兴趣的学习者。制作这个网站的目的是帮助更多人了解网络安全基础知识，提高防范钓鱼攻击的意识。知识就是最好的防御。
+                    </p>
+                    <div class="tech-stack">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>GitHub Pages</span>
+                    </div>
+                </div>
+
+                <!-- 项目说明 -->
+                <div class="about-section">
+                    <h2>🎯 项目目的</h2>
+                    <p>
+                        在网络攻击日益猖獗的今天，91% 的网络攻击始于钓鱼邮件。然而大多数人缺乏基本的安全意识培训。
+                        这个项目旨在提供<strong>免费、易懂、交互式</strong>的网络安全培训资源，帮助普通人学会识别和防范常见的网络威胁。
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h2>📖 包含的内容</h2>
+                    <ul>
+                        <li><strong>钓鱼知识科普</strong> — 了解钓鱼攻击的类型、手法和警示信号</li>
+                        <li><strong>交互式模拟演示</strong> — 在安全环境中体验仿冒邮件和网站</li>
+                        <li><strong>密码强度检测</strong> — 实时检测密码强度并提供改进建议</li>
+                        <li><strong>URL 钓鱼检测器</strong> — 分析 URL 中的可疑特征</li>
+                        <li><strong>勒索软件科普</strong> — 了解勒索攻击的原理和防护方法</li>
+                        <li><strong>知识测验</strong> — 8 道场景题测试你的识别能力</li>
+                        <li><strong>防护指南</strong> — 实用的安全最佳实践</li>
+                    </ul>
+                </div>
+
+                <div class="about-section">
+                    <h2>🔒 隐私声明</h2>
+                    <p>
+                        本网站为<strong>纯静态网站</strong>，没有任何后端服务器。<strong>不收集、不存储、不传输任何用户数据</strong>。
+                        所有输入（密码检测、URL检测等）仅在您的浏览器本地运行，不会发送到任何服务器。
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h2>⚖️ 免责声明</h2>
+                    <p>
+                        本网站的内容仅供<strong>教育和培训目的</strong>使用。网站中展示的钓鱼攻击模拟和技术说明仅用于提高公众的防范意识。
+                        <strong>请勿将这里学到的技术用于任何非法、恶意或未经授权的活动。</strong>
+                        作者不对因滥用本网站内容而产生的任何后果负责。
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h2>🔗 链接</h2>
+                    <div class="footer-links">
+                        <a href="https://github.com/jimmylrb/lrb" target="_blank">📦 GitHub 仓库</a>
+                        <a href="https://jimmylrb.github.io/lrb/" target="_blank">🌐 网站首页</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🔐 本网站为网络安全意识培训用途 · 不收集任何用户数据</p>
+            <p>仅供教育和培训使用 · 请勿用于非法目的</p>
+        </div>
+    </footer>
+</body>
+</html>

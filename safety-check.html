@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安全检查工具 — 安全培训</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .check-tabs { display: flex; gap: 0; margin-bottom: 0; border-bottom: 2px solid var(--border); }
+        .check-tab { padding: 12px 24px; font-size: 0.9rem; font-weight: 600; cursor: pointer; border: none; background: none; color: var(--text-secondary); border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all 0.2s; font-family: inherit; }
+        .check-tab:hover { color: var(--primary); }
+        .check-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+        .check-panel { display: none; padding: 24px 0; }
+        .check-panel.active { display: block; }
+        .check-item { display: flex; align-items: flex-start; gap: 12px; padding: 14px 18px; border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 10px; cursor: pointer; transition: all 0.2s; }
+        .check-item:hover { border-color: var(--primary); background: var(--primary-light); }
+        .check-item .cb { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: all 0.2s; margin-top: 2px; }
+        .check-item.checked .cb { background: var(--success); border-color: var(--success); color: white; }
+        .check-item .label { font-size: 0.92rem; line-height: 1.5; }
+        .check-item .label .highlight { color: var(--danger); font-weight: 600; }
+        .check-result { padding: 20px; border-radius: var(--radius-sm); margin-top: 20px; font-size: 0.95rem; line-height: 1.6; display: none; }
+        .check-result.show { display: block; }
+        .check-result.danger { background: var(--danger-light); border: 1px solid #fecaca; }
+        .check-result.safe { background: var(--success-light); border: 1px solid #bbf7d0; }
+        .check-result.warning { background: var(--warning-light); border: 1px solid #fcd34d; }
+        .check-result h4 { font-size: 1.05rem; margin-bottom: 8px; }
+        .reset-btn { display: inline-block; margin-top: 16px; padding: 8px 20px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); cursor: pointer; font-size: 0.85rem; transition: all 0.2s; font-family: inherit; color: var(--text-secondary); }
+        .reset-btn:hover { border-color: var(--primary); color: var(--primary); }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">🛡️ 安全培训</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="demo.html">模拟演示</a></li>
+                <li><a href="password.html">密码检测</a></li>
+                <li><a href="url-checker.html">URL检测</a></li>
+                <li><a href="ransomware.html">勒索软件</a></li>
+                <li><a href="scam-case.html">诈骗案例</a></li>
+                <li><a href="security-simulator.html">安全模拟</a></li>
+                <li><a href="safety-check.html" class="active">安全检查</a></li>
+                <li><a href="quiz.html">测验</a></li>
+                <li><a href="guide.html">防护指南</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>✅ 交互式安全检查工具</h1>
+            <p class="page-desc">收到可疑消息时，逐项勾选检查，帮你快速判断是否安全。</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container" style="max-width:700px;margin:0 auto;">
+            <div class="check-tabs" id="check-tabs">
+                <button class="check-tab active" data-tab="email" onclick="switchTab('email')">📧 邮件检查</button>
+                <button class="check-tab" data-tab="link" onclick="switchTab('link')">🔗 链接检查</button>
+                <button class="check-tab" data-tab="phone" onclick="switchTab('phone')">📞 电话检查</button>
+                <button class="check-tab" data-tab="app" onclick="switchTab('app')">📱 App 检查</button>
+            </div>
+
+            <div class="check-panel active" id="panel-email">
+                <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:16px;">收到一封可疑邮件？逐项勾选以下检查项：</p>
+                <div class="check-item" onclick="toggleCheck(this, 'email')">
+                    <div class="cb">✓</div>
+                    <div class="label">发件人地址与官方域名一致（如 @xxbank.com，不是 @xxbank-security.net）</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'email')">
+                    <div class="cb">✓</div>
+                    <div class="label">没有使用"紧急"、"立即"、"否则将被冻结"等制造紧迫感的措辞</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'email')">
+                    <div class="cb">✓</div>
+                    <div class="label">邮件中没有要求点击链接进行"验证"、"更新"账户信息</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'email')">
+                    <div class="cb">✓</div>
+                    <div class="label">邮件中没有拼写错误或奇怪的语法</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'email')">
+                    <div class="cb">✓</div>
+                    <div class="label">将鼠标悬停在链接上，显示的地址与链接目标一致</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'email')">
+                    <div class="cb">✓</div>
+                    <div class="label">附件是你预期中的文件（不是意外的 .exe、.zip、.docm 等）</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'email')">
+                    <div class="cb">✓</div>
+                    <div class="label">收件人地址没有异常（检查 BCC 是否包含陌生人）</div>
+                </div>
+                <div id="result-email" class="check-result"></div>
+                <button class="reset-btn" onclick="resetCheck('email')">🔄 重置</button>
+            </div>
+
+            <div class="check-panel" id="panel-link">
+                <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:16px;">收到一个可疑链接？逐项勾选以下检查项：</p>
+                <div class="check-item" onclick="toggleCheck(this, 'link')">
+                    <div class="cb">✓</div>
+                    <div class="label">链接使用 <span class="highlight">HTTPS</span>（https://，不是 http://）</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'link')">
+                    <div class="cb">✓</div>
+                    <div class="label">域名中没有混淆字符（如 1 代替 l、0 代替 o、rn 代替 m）</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'link')">
+                    <div class="cb">✓</div>
+                    <div class="label">不是 IP 地址代替域名（如 http://192.168.x.x）</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'link')">
+                    <div class="cb">✓</div>
+                    <div class="label">不是 URL 缩短服务（tinyurl、bit.ly 等）</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'link')">
+                    <div class="cb">✓</div>
+                    <div class="label">顶级域名无异常（不是 .xyz、.top、.club 等可疑域名）</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'link')">
+                    <div class="cb">✓</div>
+                    <div class="label">品牌名出现在主域名中，而不是子域名或路径中</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'link')">
+                    <div class="cb">✓</div>
+                    <div class="label">链接中没有 @ 符号</div>
+                </div>
+                <div id="result-link" class="check-result"></div>
+                <button class="reset-btn" onclick="resetCheck('link')">🔄 重置</button>
+            </div>
+
+            <div class="check-panel" id="panel-phone">
+                <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:16px;">接到一个可疑电话？逐项勾选以下检查项：</p>
+                <div class="check-item" onclick="toggleCheck(this, 'phone')">
+                    <div class="cb">✓</div>
+                    <div class="label">来电号码不是"+"开头的境外号码（如 +1、+85 等）</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'phone')">
+                    <div class="cb">✓</div>
+                    <div class="label">对方没有要求你下载任何 App 或开启"屏幕共享"</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'phone')">
+                    <div class="cb">✓</div>
+                    <div class="label">对方没有索要验证码、密码、银行卡号等敏感信息</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'phone')">
+                    <div class="cb">✓</div>
+                    <div class="label">没有以"退款"、"取消会员"、"调整利率"等借口要求你操作</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'phone')">
+                    <div class="cb">✓</div>
+                    <div class="label">没有自称"公检法"要求你配合调查</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'phone')">
+                    <div class="cb">✓</div>
+                    <div class="label">没有要求你"不要告诉家人/不要挂断电话"</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'phone')">
+                    <div class="cb">✓</div>
+                    <div class="label">你能通过官方渠道（官网电话、官方 App）核实来电身份</div>
+                </div>
+                <div id="result-phone" class="check-result"></div>
+                <button class="reset-btn" onclick="resetCheck('phone')">🔄 重置</button>
+            </div>
+
+            <div class="check-panel" id="panel-app">
+                <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:16px;">收到一个可疑的 App 下载请求？逐项勾选以下检查项：</p>
+                <div class="check-item" onclick="toggleCheck(this, 'app')">
+                    <div class="cb">✓</div>
+                    <div class="label">从官方应用商店（App Store、华为应用市场等）下载</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'app')">
+                    <div class="cb">✓</div>
+                    <div class="label">不是通过网页弹窗、短信链接或扫码下载</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'app')">
+                    <div class="cb">✓</div>
+                    <div class="label">开发者信息清晰可查，不是个人开发者</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'app')">
+                    <div class="cb">✓</div>
+                    <div class="label">下载量正常（不是下载量个位数的新 App）</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'app')">
+                    <div class="cb">✓</div>
+                    <div class="label">用户评价真实（不是全五星好评但内容通用）</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'app')">
+                    <div class="cb">✓</div>
+                    <div class="label">App 申请的权限合理（如手电筒 App 不需要读取通讯录）</div>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 'app')">
+                    <div class="cb">✓</div>
+                    <div class="label">不是通过"免费领"、"扫码送"等渠道诱导下载</div>
+                </div>
+                <div id="result-app" class="check-result"></div>
+                <button class="reset-btn" onclick="resetCheck('app')">🔄 重置</button>
+            </div>
+
+            <div style="margin-top:32px;background:var(--primary-light);border:1px solid #bfdbfe;border-radius:var(--radius-sm);padding:20px;">
+                <h4 style="color:var(--primary);margin-bottom:8px;">💡 使用提示</h4>
+                <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6;">
+                    ✅ 每个项目中，<strong>勾选的越多说明越安全</strong><br>
+                    ✅ 如果大部分项目无法勾选，请提高警惕<br>
+                    ✅ 任何勾选了 "没有……" 类项目的，都是安全信号<br>
+                    ❌ 即使所有项都通过，也请保持警惕 — 骗子手段不断翻新
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🔐 本网站为网络安全意识培训用途 · 不收集任何用户数据</p>
+            <p>仅供教育和培训使用 · 请勿用于非法目的</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleCheck(el, type) {
+            el.classList.toggle('checked');
+            updateResult(type);
+        }
+
+        function updateResult(type) {
+            const items = document.querySelectorAll(`#panel-${type} .check-item`);
+            const total = items.length;
+            const checked = document.querySelectorAll(`#panel-${type} .check-item.checked`).length;
+            const resultDiv = document.getElementById(`result-${type}`);
+            
+            if (checked === 0) {
+                resultDiv.className = 'check-result';
+                resultDiv.style.display = 'none';
+                return;
+            }
+            
+            resultDiv.style.display = 'block';
+            const pct = checked / total;
+            
+            if (pct >= 0.85) {
+                resultDiv.className = 'check-result show safe';
+                resultDiv.innerHTML = `<h4>✅ 看起来比较安全 (${checked}/${total})</h4><p>大部分检查项都通过了，但请保持基本的警惕。如有疑问，通过官方渠道独立核实。</p>`;
+            } else if (pct >= 0.5) {
+                resultDiv.className = 'check-result show warning';
+                resultDiv.innerHTML = `<h4>⚠️ 存在一些可疑特征 (${checked}/${total})</h4><p>有 ${total - checked} 项没通过。建议先通过官方渠道核实，再进行操作。不要着急，多想一想。</p>`;
+            } else {
+                resultDiv.className = 'check-result show danger';
+                resultDiv.innerHTML = `<h4>🔴 高度可疑！(${checked}/${total})</h4><p>大部分安全检查都没有通过。<strong>不要进行任何操作！</strong>通过官方渠道核实后再决定。如有疑问，可以寻求他人帮助判断。</p>`;
+            }
+        }
+
+        function resetCheck(type) {
+            document.querySelectorAll(`#panel-${type} .check-item`).forEach(el => el.classList.remove('checked'));
+            const resultDiv = document.getElementById(`result-${type}`);
+            resultDiv.className = 'check-result';
+            resultDiv.style.display = 'none';
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.check-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.check-panel').forEach(p => p.classList.remove('active'));
+            document.querySelector(`.check-tab[data-tab="${tab}"]`).classList.add('active');
+            document.getElementById(`panel-${tab}`).classList.add('active');
+        }
+    </script>
+</body>
+</html>

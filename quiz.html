@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>钓鱼识别测验 — 安全培训</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">🛡️ 安全培训</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="demo.html">模拟演示</a></li>
+                <li><a href="quiz.html" class="active">知识测验</a></li>
+                <li><a href="guide.html">防护指南</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="page-header">
+        <div class="container">
+            <h1>📝 钓鱼识别测验</h1>
+            <p class="page-desc">下面每个场景中，判断它是否是钓鱼攻击。全部答对才算通关哦！</p>
+        </div>
+    </section>
+
+    <!-- 测验 -->
+    <section class="section" id="quiz-section">
+        <div class="container">
+            <div class="quiz-container">
+                <!-- 进度条 -->
+                <div class="quiz-progress">
+                    <div class="progress-bar" id="progress-bar"></div>
+                    <span id="progress-text">第 1 / 8 题</span>
+                </div>
+
+                <!-- 题目容器 -->
+                <div id="question-container">
+                    <div class="question-number" id="question-number">问题 1</div>
+                    <h3 class="question-text" id="question-text">加载中...</h3>
+                    <div class="question-context" id="question-context"></div>
+                    <div class="options" id="options-container"></div>
+                </div>
+
+                <!-- 结果反馈 -->
+                <div id="feedback-container" class="hidden">
+                    <div class="feedback-icon" id="feedback-icon"></div>
+                    <h3 id="feedback-title"></h3>
+                    <p id="feedback-text"></p>
+                    <button class="btn btn-primary" id="next-btn">下一题 →</button>
+                </div>
+
+                <!-- 最终结果 -->
+                <div id="result-container" class="hidden">
+                    <div class="result-icon">🏆</div>
+                    <h2>测验完成！</h2>
+                    <div class="result-score">
+                        <span id="score-number">0</span>
+                        <span>/ 8</span>
+                    </div>
+                    <p id="score-message"></p>
+                    <div class="result-actions">
+                        <button class="btn btn-primary" onclick="location.reload()">🔄 重新测验</button>
+                        <a href="guide.html" class="btn btn-secondary">📖 学习防护指南</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🔐 本网站为网络安全意识培训用途 · 不收集任何用户数据</p>
+            <p>仅供教育和培训使用 · 请勿用于非法目的</p>
+        </div>
+    </footer>
+
+    <script src="quiz.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

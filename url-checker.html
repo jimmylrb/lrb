@@ -101,6 +101,8 @@
                         <li>🔴 📏 异常长的 URL</li>
                     </ul>
                 </div>
+
+                <div id="stats-panel-container"></div>
             </div>
         </div>
     </section>
@@ -112,6 +114,7 @@
         </div>
     </footer>
 
+    <script src="stats.js"></script>
     <script>
         document.getElementById('url-input').addEventListener('keydown', function(e) {
             if (e.key === 'Enter') checkURL();
@@ -256,7 +259,23 @@
                 div.textContent = r.text;
                 itemsDiv.appendChild(div);
             });
+
+            // 脱敏统计：只记录风险等级，不记录 URL 内容
+            if (window.stats && (result.level === 'safe' || result.level === 'warning' || result.level === 'danger')) {
+                window.stats.recordUrl(result.level);
+                refreshStatsPanel();
+            }
         }
+
+        function refreshStatsPanel() {
+            const container = document.getElementById('stats-panel-container');
+            if (container && window.stats) {
+                container.innerHTML = window.stats.renderPanel();
+            }
+        }
+
+        // 页面加载时渲染统计面板
+        refreshStatsPanel();
     </script>
 </body>
 </html>

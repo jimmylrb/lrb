@@ -31,6 +31,69 @@
     --radius-sm: 8px;
 }
 
+/* ---------- 深色模式 ---------- */
+[data-theme="dark"] {
+    --primary: #60a5fa;
+    --primary-dark: #3b82f6;
+    --primary-light: #1e3a5f;
+    --danger: #f87171;
+    --danger-light: #3b1414;
+    --success: #4ade80;
+    --success-light: #123524;
+    --warning: #fbbf24;
+    --warning-light: #3a2c0c;
+    --text: #e5e7eb;
+    --text-secondary: #9ca3af;
+    --bg: #111827;
+    --bg-alt: #1f2937;
+    --border: #374151;
+    --shadow: 0 1px 3px rgba(0,0,0,0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.5), 0 4px 6px -2px rgba(0,0,0,0.4);
+}
+
+/* 深色模式下针对硬编码浅色的覆盖 */
+[data-theme="dark"] .navbar {
+    background: rgba(17,24,39,0.95);
+}
+
+[data-theme="dark"] .email-header {
+    background: #1f2937;
+    border-bottom-color: var(--border);
+}
+
+[data-theme="dark"] .browser-bar {
+    background: #1f2937;
+    border-bottom-color: var(--border);
+}
+
+[data-theme="dark"] .browser-url {
+    background: #111827;
+    border-color: var(--border);
+    color: var(--text);
+}
+
+[data-theme="dark"] .browser-url.suspicious {
+    color: var(--danger);
+    border-color: var(--danger);
+}
+
+[data-theme="dark"] .email-body p { color: var(--text); }
+
+[data-theme="dark"] .form-group input {
+    background: #111827;
+    color: var(--text);
+    border-color: var(--border);
+}
+
+[data-theme="dark"] .quiz-progress .progress-bar {
+    background: var(--primary-light);
+}
+
+[data-theme="dark"] .tip-box { background: var(--warning-light); }
+[data-theme="dark"] .tip-box h4 { color: var(--warning); }
+[data-theme="dark"] .tip-box p { color: var(--text-secondary); }
+[data-theme="dark"] .tip-box code { background: rgba(255,255,255,0.1); }
+
 html {
     scroll-behavior: smooth;
 }
@@ -101,6 +164,25 @@ body {
     color: var(--primary);
     background: var(--primary-light);
     font-weight: 600;
+}
+
+/* 主题切换按钮 */
+.theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 6px 12px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-left: 12px;
+    transition: all 0.2s;
+    line-height: 1;
+    color: var(--text);
+}
+
+.theme-toggle:hover {
+    border-color: var(--primary);
+    background: var(--primary-light);
 }
 
 /* ---------- Hero ---------- */
@@ -1111,6 +1193,42 @@ body {
 
 .footer p {
     margin-bottom: 4px;
+}
+
+/* ---------- 学习统计面板 ---------- */
+.stats-panel {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    box-shadow: var(--shadow);
+    max-width: 600px;
+    margin: 24px auto 0;
+}
+
+.stats-panel h4 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: var(--text);
+}
+
+.stats-body {
+    display: grid;
+    gap: 6px;
+}
+
+.stats-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+}
+
+.stats-label {
+    font-weight: 600;
+    color: var(--text);
+    min-width: 90px;
 }
 
 /* ---------- 响应式 ---------- */

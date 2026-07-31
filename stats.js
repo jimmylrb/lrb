@@ -30,19 +30,23 @@ window.stats = (function() {
         }
     }
 
-    // ============ 上报钩子（默认关闭） ============
-    // 启用方法：调用 window.stats.enableUpload('https://你的上报地址')
-    // 上报内容只有脱敏统计事件，绝无原始输入
-    let UPLOAD_ENABLED = false;
-    let UPLOAD_URL = '';
+    // ============ 上报钩子（Supabase 脱敏事件上报） ============
+    // anon key 是设计给前端公开使用的（配合 RLS 策略：只能 insert，不能读/改/删）
+    // 上报内容只有脱敏统计事件（强度等级/风险等级），绝无原始输入
+    const SUPABASE_URL = 'https://sdesawclogqjhtvlzlvm.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNkZXNhd2Nsb2dxamh0dmx6bHZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU0OTE3NDYsImV4cCI6MjEwMTA2Nzc0Nn0.0hLIjABNLhQkvldc3rfQAdbSnamxInSr5wl9mgeTlFU';
 
     function uploadEvent(event, data) {
-        if (!UPLOAD_ENABLED || !UPLOAD_URL) return;
         try {
-            fetch(UPLOAD_URL, {
+            fetch(SUPABASE_URL + '/rest/v1/stats_events', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify(Object.assign({ event: event, ts: Date.now() }, data))
+                headers: {
+                    'apikey': SUPABASE_ANON_KEY,
+                    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+                    'Content-Type': 'application/json',
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify(Object.assign({ event: event }, data))
             }).catch(function() {});
         } catch (e) { /* 静默失败 */ }
     }
@@ -125,7 +129,5 @@ window.stats = (function() {
         recordPassword: recordPassword,
         recordUrl: recordUrl,
         renderPanel: renderPanel,
-        // 站长启用脱敏上报（示例：stats.enableUpload('https://xxx.formspree.io/f/xxxx')）
-        enableUpload: function(url) { UPLOAD_ENABLED = !!url; UPLOAD_URL = url || ''; }
     };
 })();

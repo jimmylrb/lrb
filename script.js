@@ -29,4 +29,38 @@ document.addEventListener('DOMContentLoaded', function() {
             e.stopPropagation();
         });
     });
+
+    // ========== 深色模式 ==========
+    const THEME_KEY = 'sec_theme';
+    const themeToggle = document.getElementById('theme-toggle');
+
+    // 应用已保存的主题（优先于系统偏好）
+    function applyTheme(theme) {
+        if (theme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+        // 更新按钮图标
+        if (themeToggle) {
+            themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+            themeToggle.title = theme === 'dark' ? '切换到浅色模式' : '切换到深色模式';
+        }
+        try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
+    }
+
+    // 初始化：本地保存的 > 系统偏好 > 默认浅色
+    let saved = null;
+    try { saved = localStorage.getItem(THEME_KEY); } catch (e) {}
+    if (!saved) {
+        saved = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    }
+    applyTheme(saved);
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            applyTheme(isDark ? 'light' : 'dark');
+        });
+    }
 });
